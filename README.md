@@ -1,5 +1,5 @@
-# Lista de Compras
-- Aplicativo gerenciar lista de compras
+# Shop List
+- Aplicativo para gerenciar lista de compras
 
 ## Stacks:
 - React Native

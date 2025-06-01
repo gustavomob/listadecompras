@@ -44,5 +44,20 @@ export const styles = StyleSheet.create({
    fontSize: 12,
    fontWeight:"600",
    color:"rgb(133, 131, 131)",   
+  },
+  separator:{
+    width:"100%",
+    height:1,
+    backgroundColor: "rgb(224, 238, 224)",
+    marginVertical: 16
+  },
+  listContent:{
+    paddingTop: 24,
+    paddingBottom: 62
+  },
+  empty:{
+    fontSize: 14,
+    color: "#808080",
+    textAlign:"center"
   }
 });
