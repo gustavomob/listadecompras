@@ -59,5 +59,15 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: "#808080",
     textAlign:"center"
-  }
+  },
+ emptyContainer: {
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginTop: 32,
+},
+emptyContent: {
+  marginTop: 12,
+  fontSize: 16,
+  color: '#999',
+},
 });
