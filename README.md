@@ -1,4 +1,4 @@
-# Lista De Compras
+# Sop List
 - Aplicativo para gerenciar uma lista de compras
 
 ## Stacks:
