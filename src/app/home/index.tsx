@@ -5,17 +5,18 @@ import { Input } from "@/components/input"
 import { Filter } from "@/components/filter"
 import { FilterStatus } from "@/types/filter-status"
 import { Item } from "@/components/item"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {ShoppingBasket} from 'lucide-react-native'
+import { itemsStorage, ItemStorage } from "@/storage/items_storage"
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING]
 
 export function Home() {
- const [items, setItems] = useState<any>([])
+ const [items, setItems] = useState<ItemStorage[]>([])
  const [filter, setFilter] = useState(FilterStatus.PENDING); 
  const [description, setDescription] = useState('')
 
- function handleAddItems(){
+ async function handleAddItems(){
   if(!description.trim()){
     return Alert.alert("Adicionar", "Informe o que deseja comprar")
   }
@@ -24,9 +25,22 @@ export function Home() {
     description,
     status: FilterStatus.PENDING
   }  
-  setItems([newItem])
+ await itemsStorage.add(newItem)
+ await getItems()
  }
 
+ async function getItems() {
+  try {
+    const response = await itemsStorage.get()
+    setItems(response)
+  } catch (error) {
+    Alert.alert("Erro", "Não foi possível filtrar os itens.")
+  }  
+ }
+
+useEffect(()=>{
+getItems()
+}, [])
  return (
   <View style={styles.container}>
 <Image style={styles.logo} source={require("@/assets/logo.png")}  />
@@ -53,7 +67,7 @@ onChangeText={setDescription}
   </View>  
   <FlatList 
   data={items}
-  keyExtractor={item => item}
+  keyExtractor={item => item.id}
   renderItem={({item})=> (
 
 <Item data={item}
