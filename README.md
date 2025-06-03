@@ -1,5 +1,5 @@
-# Sop List
-- Aplicativo para gerenciar uma lista de compras
+# Lista de Compras
+- Aplicativo para gerenciar lista de compras
 
 ## Stacks:
 - [React Native](https://docs.expo.dev/)
