@@ -9,8 +9,8 @@ export const styles = StyleSheet.create({
     paddingTop: 62,    
   },
   logo:{
-    height: 34,
-    width: 250,      
+    height: 36,
+    width: 150,      
   },
   form:{
     width: "100%",
