@@ -26,21 +26,34 @@ export function Home() {
     status: FilterStatus.PENDING
   }  
  await itemsStorage.add(newItem)
- await getItems()
+ await itemsByStatus()
+
+ Alert.alert("Adicionado", `${description}`)
+ setFilter(FilterStatus.PENDING)
+ setDescription("")
  }
 
- async function getItems() {
+ async function itemsByStatus() {
   try {
-    const response = await itemsStorage.get()
+    const response = await itemsStorage.getByStatus(filter)
     setItems(response)
   } catch (error) {
     Alert.alert("Erro", "Não foi possível filtrar os itens.")
   }  
  }
 
+ async function handleRemove(id: string) {
+  try {
+    await itemsStorage.remove(id)
+    await itemsByStatus()
+  } catch (error) {
+    Alert.alert("Error", "Não foi possível remover")
+  }
+ }
+
 useEffect(()=>{
-getItems()
-}, [])
+itemsByStatus()
+}, [filter])
  return (
   <View style={styles.container}>
 <Image style={styles.logo} source={require("@/assets/logo.png")}  />
@@ -48,6 +61,7 @@ getItems()
 <Input 
 placeholder="O que você precisa comprar?"
 onChangeText={setDescription}
+value={description}
 />
 <Botao title="Adicionar" onPress={handleAddItems}/>
 </View>
@@ -72,7 +86,7 @@ onChangeText={setDescription}
 
 <Item data={item}
   onStatus={()=> console.log("Muda status")}  
-  onRemove={()=> console.log("Remover")}   
+  onRemove={()=> handleRemove(item.id)}   
   />
 )}
 showsVerticalScrollIndicator={false}
